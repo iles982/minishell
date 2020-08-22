@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 11:51:33 by tclarita          #+#    #+#             */
-/*   Updated: 2020/08/20 13:59:35 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/08/21 17:21:40 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void	set_dir(char **env)
 	arg[2] = ft_strnew(PATH_MAX);
 	arg[3] = 0;
 	getcwd(arg[2], PATH_MAX);
-	ft_putstr("PATH is: ");
-	ft_putendl(arg[2]);
 	set_env(arg, env);
 	free(arg[1]);
 	free(arg[2]);
@@ -60,7 +58,7 @@ void	loop(char **env)
 	status = TRUE;
 	while (status)
 	{
-		set_dir(env);
+		// set_dir(env);
 		ft_putstr("Dota_Shell_$>");
 		get_next_line(0, &line);
 		comands = ft_strsplit(line, ';');

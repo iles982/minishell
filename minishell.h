@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 11:51:47 by tclarita          #+#    #+#             */
-/*   Updated: 2020/08/20 12:18:36 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/08/22 14:54:04 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@
 
 void    do_comands(char **env, char **comands);
 char	**c_exit(char **args, char **env);
+char	**echo(char **args, char **env);
 char    **set_env(char **arg, char **env);
+char    **pwd(char **args, char **env);
+char    **cd(char **args, char **env);
+
+char	*get_home(char **env);
+char	*comands(int i);
+char	**execute_comand(char **args, char **env, int i);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 12:04:09 by tclarita          #+#    #+#             */
-/*   Updated: 2020/08/20 15:46:30 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/08/22 17:12:26 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,33 @@
 
 void	execute(char **args, char **env)
 {
-	pid_t pid;
+	pid_t	pid;
+	int		i;
 
-	pid = fork();
-	if (pid == 0)	//запускаем дочерний процесс
+	i = 0;
+	while (i < 9)
 	{
-		execve(&c_exit, args, env);
-		perror("Ошибка EXEC");
+		if (!ft_strcmp(args[0], comands(i)))
+		{
+			execute_comand(args, env, i);
+			i = 8;
+			break;
+		}
+		i++;
 	}
-	else if (pid < 0)
-		exit(1);
-	else
-		wait(NULL);
-	(void)args;
-	(void)env;
+	if (i == 9)
+	{
+		pid = fork();
+		if (pid == 0)	//запускаем дочерний процесс
+		{
+			if (execve(args[0], args, env) == -1)
+				ft_printf("%s%s\n", args[0], ": command not found");
+		}
+		else if (pid < 0)
+			exit(1);
+		else
+			wait(NULL);
+	}
 }
 
 void	do_comands(char **env, char **comands)
