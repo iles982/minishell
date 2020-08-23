@@ -6,13 +6,13 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 12:04:09 by tclarita          #+#    #+#             */
-/*   Updated: 2020/08/22 17:12:26 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/08/23 17:52:45 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	execute(char **args, char **env)
+char	**execute(char **args, char **env)
 {
 	pid_t	pid;
 	int		i;
@@ -22,7 +22,7 @@ void	execute(char **args, char **env)
 	{
 		if (!ft_strcmp(args[0], comands(i)))
 		{
-			execute_comand(args, env, i);
+			env = execute_comand(args, env, i);
 			i = 8;
 			break;
 		}
@@ -41,9 +41,10 @@ void	execute(char **args, char **env)
 		else
 			wait(NULL);
 	}
+	return (env);
 }
 
-void	do_comands(char **env, char **comands)
+char	**do_comands(char **env, char **comands)
 {
 	int		i;
 	int		j;
@@ -54,9 +55,11 @@ void	do_comands(char **env, char **comands)
 	while (comands[i])
 	{
 		j = 0;
-		args = ft_strsplit(comands[i], ' ');
+		args = ft_strtok(comands[i], DELIM);
+		if (!args[0])
+			return (env);
 		free(comands[i]);
-		execute(args, env);
+		env = execute(args, env);
 		while (args[j])
 		{
 			free(args[j]);
@@ -64,4 +67,5 @@ void	do_comands(char **env, char **comands)
 		}
 		i++;
 	}
+	return (env);
 }

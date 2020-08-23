@@ -6,28 +6,82 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 12:17:58 by tclarita          #+#    #+#             */
-/*   Updated: 2020/08/20 12:57:29 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/08/23 12:10:04 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**one_arg(char **args, char **env)
+char	*ft_mystr(char *first, char *second, char c)
 {
-	// int		i;
-	// int		j;
-	// char	**arg;
+	int i;
+	int j;
+	int k;
+	char *str;
 
-	(void)args;
-	(void)env;
-	return (args);
+	i = ft_strlen(first);
+	j = ft_strlen(second);
+	str = ft_strnew(i + j + 1);
+	k = 0;
+	while (k < i)
+	{
+		str[k] = first[k];
+		k++;
+	}
+	str[k] = c;
+	i = 0;
+	k++;
+	while (i < j)
+	{
+		str[k] = second[i];
+		i++;
+		k++;
+	}
+	return (str);
+}
+
+int		search_str(char *first, char **env)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (env[i])
+	{
+		j = 0;
+		while (first[j] && env[i][j] != '=' && (first[j] == env[i][j]))
+		{
+			if (first[j] == env[i][j])
+				j++;
+			if (first[j] == '\0' && env[i][j] == '=')
+				return (i);
+		}
+		i++;
+	}
+	return (i);
 }
 
 char	**set_env(char **args, char **env)
 {
-	if (!args[1])
+	int		i;
+	char	*str;
+
+	if (!args[1] || !args[2] || args[3])
 		return (env);
-	if (!args[2])
-		return (one_arg(args, env));
-	return (args);
+	i = search_str(args[1], env);
+	if (env[i])
+	{
+		str = ft_mystr(args[1], args[2], '=');
+		free(env[i]);
+		env[i] = ft_strdup(str);
+		free(str);
+	}
+	else
+	{
+		str = ft_mystr(args[1], args[2], '=');
+		env[i] = ft_strdup(str);
+		free(str);
+		env[i + 1] = NULL;
+	}
+	return (env);
 }

@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 10:50:13 by tclarita          #+#    #+#             */
-/*   Updated: 2020/08/22 17:18:57 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/08/23 14:58:12 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ char	*get_home(char **env)
 
 	i = 0;
 	j = 0;
-	while (env[i][0] != 'H')
-		i++;
+	i = search_str("HOME", env);
 	path = ft_strnew(PATH_MAX);
 	while (env[i][j + 5])
 	{
@@ -49,23 +48,57 @@ char	*get_home_path(char **args, char **env)
 	return (path);
 }
 
+char	*old_path(char **env)
+{
+	int		i;
+	char	*path;
+	int		j;
+
+	i = search_str("OLDPWD", env);
+	path = ft_strnew(PATH_MAX);
+	j = 0;
+	while (env[i][j + 7])
+	{
+		path[j] = env[i][j + 7];
+		j++;
+	}
+	ft_putendl(path);
+	set_old_pwd(env);
+	return (path);
+}
+
 char	**cd(char **args, char **env)
 {
 	char *path;
-	if (args[2])
+
+	if (args[1][0] != '-' && args[1][1] != '\0')
+		set_old_pwd(env);
+	if (!args[1])
+	{
+		path = get_home(env);
+		chdir(path);
+		free(path);
+		return (env);
+	}
+	else if (args[2])
 	{
 		ft_putendl("bash: cd: too many arguments");
 		return (env);
 	}
-	if (args[1])
+	else
 	{
+		if (!ft_strcmp(args[1], "-"))
+		{
+			path = old_path(env);
+			chdir(path);
+			free(path);
+			return (env);
+		}
 		if (args[1][0] == '~')
 			path = get_home_path(args, env);
 		else
 			path = ft_strdup(args[1]);
 	}
-	else
-		path = get_home(env);
 	if (access(path, F_OK)  && ft_strcmp(path, "~"))
 		ft_printf("%s %s %s\n", "bash: cd:", path, "No such file or directory");
 	else

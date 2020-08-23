@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 11:51:47 by tclarita          #+#    #+#             */
-/*   Updated: 2020/08/22 14:54:04 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/08/23 17:50:18 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,18 @@
 
 # define TRUE 1
 # define PATH_MAX 4096
+# define DELIM " \t\n\r\a\""
 
-void    do_comands(char **env, char **comands);
+char		**ft_strtok(char *s, char *sep);
+char    **do_comands(char **env, char **comands);
 char	**c_exit(char **args, char **env);
 char	**echo(char **args, char **env);
 char    **set_env(char **arg, char **env);
 char    **pwd(char **args, char **env);
 char    **cd(char **args, char **env);
+int		search_str(char *first, char **env);
+void	set_old_pwd(char **env);
+char	**unset_env(char **args, char **env);
 
 char	*get_home(char **env);
 char	*comands(int i);
