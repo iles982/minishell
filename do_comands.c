@@ -6,18 +6,80 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 12:04:09 by tclarita          #+#    #+#             */
-/*   Updated: 2020/08/23 18:22:49 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/08/24 19:09:37 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+char	*join_arg(char *second, char *first)
+{
+	char	*str;
+	int		i;
+
+	i = ft_strlen(first);
+	first[i] = '/';
+	first[i + 1] = '\0';
+	str = ft_strjoin(first, second);
+	free(first);
+	return (str);
+}
+
+int		find_path(char **args, char **env, int i)
+{
+	char	*path;
+	int		j;
+	int		k;
+
+	j = search_str("PATH", env);
+	if (env[j][i] == '\0')
+		return (-1);
+	if (!env[j])
+		return (-1);
+	path = ft_strnew(PATH_MAX);
+	k = 0;
+	while (env[j][i] != ':' && env[j][i])
+	{
+		path[k] = env[j][i];
+		k++;
+		i++;
+	}
+	path = join_arg(args[0], path);
+	if (execve(path, args, env) == -1)
+		return (i + 1);
+	else
+		return (-1);
+}
+
+int		try_paths(char **args, char **env, int i)
+{
+	if (execve(args[0], args, env) == -1)
+		return(find_path(args, env, i));
+	else
+		return (-1);
+}
+
+char	**do_fork(char **args, char **env, int i)
+{
+	pid_t pid;
+
+	pid = fork();
+	if (pid == 0)	//запускаем дочерний процесс
+	{
+		i = 5;
+		while (i != -1)
+			i = try_paths(args, env, i);
+	}
+	else if (pid < 0)
+		exit(1);
+	else
+		wait(NULL);
+	return (env);
+}
+
 char	**execute(char **args, char **env)
 {
-	pid_t	pid;
 	int		i;
-	char	*path;
-	char	*path2;
 
 	i = 0;
 	while (i < 9)
@@ -32,45 +94,8 @@ char	**execute(char **args, char **env)
 	}
 	if (i == 9)
 	{
-		pid = fork();
-		if (pid == 0)	//запускаем дочерний процесс
-		{
-			if (execve(args[0], args, env) == -1)
-			{
-				path = ft_strnew(PATH_MAX);	
-				int j =	search_str("PATH", env);
-				int i = 0;
-				while (env[j][i + 5] != ':')
-				{
-					path[i] = env[j][i + 5];
-					i++;
-				}
-				path[i] = '/';
-				path[i + 1] = '\0';
-				path = ft_strjoin(path, args[0]);
-			}
-			if (execve(path, args, env) == -1)
-			{
-				path2 = ft_strnew(PATH_MAX);	
-				int j =	search_str("PATH", env);
-				int i = 0;
-				while (env[j][i + 10])
-				{
-					path2[i] = env[j][i + 10];
-					i++;
-				}
-				path2[i] = '/';
-				path2[i + 1] = '\0';
-				path2 = ft_strjoin(path2, args[0]);
-				ft_putendl(path2);
-			}
-			if (execve(path2, args, env) == -1)
-				ft_printf("%s%s\n", args[0], ": command not found");
-		}
-		else if (pid < 0)
-			exit(1);
-		else
-			wait(NULL);
+		i = 5;
+		env = do_fork(args, env, i);
 	}
 	return (env);
 }
