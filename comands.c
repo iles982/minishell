@@ -6,11 +6,30 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 17:22:59 by tclarita          #+#    #+#             */
-/*   Updated: 2020/08/23 15:50:10 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/08/25 12:13:05 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	my_exit(char **args, char **env)
+{
+	int i;
+
+	i = 0;
+	while (args[i])
+	{
+		free(args[i]);
+		i++;
+	}
+	i = 0;
+	while (env[i])
+	{
+		free(env[i]);
+		i++;
+	}
+	exit(0);
+}
 
 char	**print_env(char **env)
 {
@@ -37,7 +56,6 @@ char	*comands(int i)
 	comand[5] = "echo";
 	comand[6] = "setenv"; //повтор
 	comand[7] = "pwd";
-	comand[8] = "PATH";
 	return (comand[i]);
 }
 
@@ -51,15 +69,15 @@ char	**execute_comand(char **args, char **env, int i)
 		return (unset_env(args, env));
 	if (i == 3)
 		return (cd(args, env));
+	if (i == 4)
+	{
+		my_exit(args, env);
+		return (env);
+	}
 	if (i == 5)
 		return (echo(args, env));
 	if (i == 7)
 		return (pwd(args, env));
-	if (i == 4)
-	{
-		//чистим все
-		exit(1);
-	}
 	else
 		return (env);
 }
