@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 10:50:13 by tclarita          #+#    #+#             */
-/*   Updated: 2020/08/23 14:58:12 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/08/25 10:26:44 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,33 +67,47 @@ char	*old_path(char **env)
 	return (path);
 }
 
+char	**cd_minus(char **env)
+{
+	char *path;
+
+	path = old_path(env);
+	chdir(path);
+	free(path);
+	return (env);
+}
+
+char	**no_args(char **env)
+{
+	char *path;
+
+	set_old_pwd(env);
+	path = get_home(env);
+	chdir(path);
+	free(path);
+	return (env);
+}
+
+char	**too_many_args(char **env)
+{
+	ft_putendl("bash: cd: too many arguments");
+	return (env);
+}
+
 char	**cd(char **args, char **env)
 {
 	char *path;
 
+	if (!args[1])
+		return (no_args(env));
 	if (args[1][0] != '-' && args[1][1] != '\0')
 		set_old_pwd(env);
-	if (!args[1])
-	{
-		path = get_home(env);
-		chdir(path);
-		free(path);
-		return (env);
-	}
-	else if (args[2])
-	{
-		ft_putendl("bash: cd: too many arguments");
-		return (env);
-	}
+	if (args[2])
+		return (too_many_args(env));
 	else
 	{
 		if (!ft_strcmp(args[1], "-"))
-		{
-			path = old_path(env);
-			chdir(path);
-			free(path);
-			return (env);
-		}
+			return (cd_minus(env));
 		if (args[1][0] == '~')
 			path = get_home_path(args, env);
 		else
