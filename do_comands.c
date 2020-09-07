@@ -6,24 +6,11 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 12:04:09 by tclarita          #+#    #+#             */
-/*   Updated: 2020/09/07 12:34:03 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/09/07 13:54:10 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*join_arg(char *second, char *first)
-{
-	char	*str;
-	int		i;
-
-	i = ft_strlen(first);
-	first[i] = '/';
-	first[i + 1] = '\0';
-	str = ft_strjoin(first, second);
-	free(first);
-	return (str);
-}
 
 int		find_path(char **args, char **env, int i)
 {
@@ -67,7 +54,7 @@ char	**do_fork(char **args, char **env, int i)
 	pid_t pid;
 
 	pid = fork();
-	if (pid == 0)	//запускаем дочерний процесс
+	if (pid == 0)
 	{
 		i = 5;
 		while (i != -1)
@@ -106,33 +93,19 @@ char	**execute(char **args, char **env, char **comand)
 char	**do_comands(char **env, char **comands)
 {
 	int		i;
-	int		j;
 	char	**args;
 
 	i = 0;
-	j = 0;
 	while (comands[i])
 	{
 		args = ft_strtok(comands[i], DELIM);
 		if (!args[0])
 		{
-			j = 0;
-			while (args[j])
-			{
-				free(args[j]);
-				j++;
-			}
-			free(args);
+			free_str2(args);
 			return (env);
 		}
 		env = execute(args, env, comands);
-		j = 0;
-		while (args[j])
-		{
-			free(args[j]);
-			j++;
-		}
-		free(args);
+		free_str2(args);
 		i++;
 	}
 	return (env);

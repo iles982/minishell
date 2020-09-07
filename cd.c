@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 10:50:13 by tclarita          #+#    #+#             */
-/*   Updated: 2020/09/07 10:05:46 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/09/07 13:39:06 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,34 +65,6 @@ char	*old_path(char **env)
 	ft_putendl(path);
 	set_old_pwd(env);
 	return (path);
-}
-
-char	**cd_minus(char **env)
-{
-	char *path;
-
-
-	path = old_path(env);
-	chdir(path);
-	free(path);
-	return (env);
-}
-
-char	**no_args(char **env)
-{
-	char *path;
-
-	set_old_pwd(env);
-	path = get_home(env);
-	chdir(path);
-	free(path);
-	return (env);
-}
-
-char	**too_many_args(char **env)
-{
-	ft_putendl("bash: cd: too many arguments");
-	return (env);
 }
 
 char	**cd(char **args, char **env)
