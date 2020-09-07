@@ -6,7 +6,7 @@
 #    By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/21 17:52:57 by tclarita          #+#    #+#              #
-#    Updated: 2020/01/29 09:08:54 by tclarita         ###   ########.fr        #
+#    Updated: 2020/09/07 15:48:01 by tclarita         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ $(NAME): $(OFILES) $(SRC)
 		@cp libft/libft.a ./$(NAME)
 		@clang -c $(SRC) -I $(HEADER) $(FLAGS)
 		@ar rc $(NAME) $(OFILES)
-		ranlib $(NAME)
+		@ranlib $(NAME)
 
 %.o : %.c
 		@echo "$(NAME) >>> Add/Update $^"
