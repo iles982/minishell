@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 12:04:09 by tclarita          #+#    #+#             */
-/*   Updated: 2020/08/25 10:00:59 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/09/07 12:34:03 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	**do_fork(char **args, char **env, int i)
 	return (env);
 }
 
-char	**execute(char **args, char **env)
+char	**execute(char **args, char **env, char **comand)
 {
 	int		i;
 
@@ -89,7 +89,7 @@ char	**execute(char **args, char **env)
 	{
 		if (!ft_strcmp(args[0], comands(i)))
 		{
-			env = execute_comand(args, env, i);
+			env = execute_comand(args, env, i, comand);
 			i = 8;
 			break;
 		}
@@ -115,15 +115,24 @@ char	**do_comands(char **env, char **comands)
 	{
 		args = ft_strtok(comands[i], DELIM);
 		if (!args[0])
+		{
+			j = 0;
+			while (args[j])
+			{
+				free(args[j]);
+				j++;
+			}
+			free(args);
 			return (env);
-		free(comands[i]);
-		env = execute(args, env);
+		}
+		env = execute(args, env, comands);
 		j = 0;
 		while (args[j])
 		{
 			free(args[j]);
 			j++;
 		}
+		free(args);
 		i++;
 	}
 	return (env);

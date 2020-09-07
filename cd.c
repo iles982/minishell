@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 10:50:13 by tclarita          #+#    #+#             */
-/*   Updated: 2020/08/25 10:37:14 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/09/07 10:05:46 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ char	*old_path(char **env)
 char	**cd_minus(char **env)
 {
 	char *path;
+
 
 	path = old_path(env);
 	chdir(path);
