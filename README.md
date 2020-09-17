@@ -24,8 +24,6 @@ GOALS:
   • You can choose as a reference whatever shell you prefer.
 
   • You must manage expansions $ and ˜
-  
-printf/libft
 
 Installation:
 
