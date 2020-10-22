@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 11:51:33 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/22 12:07:49 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/22 12:10:06 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	loop(char **env)
 	int		j;
 
 	status = TRUE;
-	while (1)
+	while (status)
 	{
 		j = 0;
 		ft_putstr("Dota_Shell_$>");
