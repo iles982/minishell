@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 11:51:33 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/22 12:10:06 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/22 13:22:21 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,6 @@ int		main(int ac, char **av, char *envp[])
 		loop(env);
 		return (0);
 	}
-	ft_putstr(av[1]);
+	ft_putstr("Wrong format input\n");
 	return (1);
 }
