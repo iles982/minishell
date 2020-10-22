@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 11:51:33 by tclarita          #+#    #+#             */
-/*   Updated: 2020/09/07 15:47:03 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/22 10:50:02 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ void	loop(char **env)
 	int status;
 	char *line;
 	char **comands;
+	int j;
 
 	status = TRUE;
+	j = 0;
 	while (status)
 	{
 		ft_putstr("Dota_Shell_$>");
@@ -64,7 +66,6 @@ void	loop(char **env)
 		comands = ft_strsplit(line, ';');
 		free(line);
 		env = do_comands(env, comands);
-		int j = 0;
 		while (comands[j])
 		{
 			free(comands[j]);
@@ -85,5 +86,5 @@ int		main(int ac, char **av, char *envp[])
 		return (0);
 	}
 	ft_putstr(av[1]);
-	return(1);
+	return (1);
 }

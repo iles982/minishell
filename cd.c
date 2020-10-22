@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/22 10:50:13 by tclarita          #+#    #+#             */
-/*   Updated: 2020/09/07 13:39:06 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/22 10:50:33 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	**cd(char **args, char **env)
 		else
 			path = ft_strdup(args[1]);
 	}
-	if (access(path, F_OK)  && ft_strcmp(path, "~"))
+	if (access(path, F_OK) && ft_strcmp(path, "~"))
 		ft_printf("%s %s %s\n", "bash: cd:", path, "No such file or directory");
 	else
 		chdir(path);

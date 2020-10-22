@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 17:22:59 by tclarita          #+#    #+#             */
-/*   Updated: 2020/09/07 12:37:42 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/22 10:47:37 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*comands(int i)
 	comand[3] = "cd";
 	comand[4] = "exit";
 	comand[5] = "echo";
-	comand[6] = "setenv"; //повтор
+	comand[6] = "setenv";
 	comand[7] = "pwd";
 	return (comand[i]);
 }

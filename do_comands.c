@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 12:04:09 by tclarita          #+#    #+#             */
-/*   Updated: 2020/09/07 13:54:10 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/22 10:50:56 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		find_path(char **args, char **env, int i)
 int		try_paths(char **args, char **env, int i)
 {
 	if (execve(args[0], args, env) == -1)
-		return(find_path(args, env, i));
+		return (find_path(args, env, i));
 	else
 		return (-1);
 }
@@ -78,7 +78,7 @@ char	**execute(char **args, char **env, char **comand)
 		{
 			env = execute_comand(args, env, i, comand);
 			i = 8;
-			break;
+			break ;
 		}
 		i++;
 	}
