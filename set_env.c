@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 12:17:58 by tclarita          #+#    #+#             */
-/*   Updated: 2020/09/07 12:23:04 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/22 10:55:15 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 char	*ft_mystr(char *first, char *second, char c)
 {
-	int i;
-	int j;
-	int k;
-	char *str;
+	int		i;
+	int		j;
+	int		k;
+	char	*str;
 
 	i = ft_strlen(first);
 	j = ft_strlen(second);
