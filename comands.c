@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 17:22:59 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/22 10:47:37 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/22 11:18:45 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*comands(int i)
 	comand[4] = "exit";
 	comand[5] = "echo";
 	comand[6] = "setenv";
-	comand[7] = "pwd";
+	comand[7] = "setenv";
 	return (comand[i]);
 }
 
@@ -83,8 +83,6 @@ char	**execute_comand(char **args, char **env, int i, char **comands)
 	}
 	if (i == 5)
 		return (echo(args, env));
-	if (i == 7)
-		return (pwd(args, env));
 	else
 		return (env);
 }

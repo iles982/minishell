@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 12:04:09 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/22 10:50:56 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/22 11:20:47 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ char	**do_fork(char **args, char **env, int i)
 		i = 5;
 		while (i != -1)
 			i = try_paths(args, env, i);
+		exit(0);
 	}
 	else if (pid < 0)
 		exit(1);

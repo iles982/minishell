@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 11:51:47 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/22 10:55:28 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/22 11:18:19 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ char	**do_comands(char **env, char **comands);
 char	**c_exit(char **args, char **env);
 char	**echo(char **args, char **env);
 char	**set_env(char **arg, char **env);
-char	**pwd(char **args, char **env);
 char	**cd(char **args, char **env);
 int		search_str(char *first, char **env);
 void	set_old_pwd(char **env);
