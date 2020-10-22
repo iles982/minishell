@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 11:51:33 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/22 10:50:02 by tclarita         ###   ########.fr       */
+/*   Updated: 2020/10/22 11:03:59 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ void	set_old_pwd(char **env)
 
 void	loop(char **env)
 {
-	int status;
-	char *line;
-	char **comands;
-	int j;
+	int		status;
+	char	*line;
+	char	**comands;
+	int		j;
 
 	status = TRUE;
 	j = 0;
