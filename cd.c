@@ -21,7 +21,7 @@ char	*get_home(char **env)
 	i = 0;
 	j = 0;
 	i = search_str("HOME", env);
-	path = ft_strnew(PATH_MAX);
+	path = ft_strnew(PATH_MAX1);
 	while (env[i][j + 5])
 	{
 		path[j] = env[i][j + 5];
@@ -55,7 +55,7 @@ char	*old_path(char **env)
 	int		j;
 
 	i = search_str("OLDPWD", env);
-	path = ft_strnew(PATH_MAX);
+	path = ft_strnew(PATH_MAX1);
 	j = 0;
 	while (env[i][j + 7])
 	{

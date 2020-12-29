@@ -24,11 +24,9 @@
 # include <pwd.h>
 # include <grp.h>
 # include <stdint.h>
-# include <sys/io.h>
 # include <sys/wait.h>
-
 # define TRUE 1
-# define PATH_MAX 4096
+# define PATH_MAX1 4096
 # define DELIM " \t\n\r\a\""
 
 char	**ft_strtok(char *s, char *sep);

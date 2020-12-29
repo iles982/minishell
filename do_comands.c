@@ -23,7 +23,7 @@ int		find_path(char **args, char **env, int i)
 		return (-1);
 	if (!env[j])
 		return (-1);
-	path = ft_strnew(PATH_MAX);
+	path = ft_strnew(PATH_MAX1);
 	k = 0;
 	while (env[j][i] != ':' && env[j][i])
 	{

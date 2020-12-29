@@ -44,7 +44,7 @@ COLOR = \033[2;14m
 all: $(NAME)
 
 $(NAME): libft.h
-	@clang -Wall -Wextra -Werror -c $(SRC) -I $(HEADER)
+	@gcc -Wall -Wextra -Werror -c $(SRC) -I $(HEADER)
 	@ar rc $(NAME) $(OFILES)
 	@ranlib $(NAME)
 	@echo "$(COLOR)Libft successfully compiled"

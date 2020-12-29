@@ -29,8 +29,8 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(SRC)
 		@make -C $(LIBFT_PRINTF)
-		@clang -c $(SRC)
-		@clang -o $(NAME) $(FLAGS) $(OBJ) $(LIBA)
+		@gcc -c $(SRC)
+		@gcc -o $(NAME) $(FLAGS) $(OBJ) $(LIBA)
 
 clean:
 		@make clean -C $(LIBFT_PRINTF)

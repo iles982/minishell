@@ -40,7 +40,7 @@ void	set_old_pwd(char **env)
 	arg[1] = ft_strdup("OLDPWD");
 	arg[2] = NULL;
 	arg[3] = NULL;
-	arg[2] = getcwd(arg[2], PATH_MAX);
+	arg[2] = getcwd(arg[2], PATH_MAX1);
 	set_env(arg, env);
 	free(arg[0]);
 	free(arg[1]);

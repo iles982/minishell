@@ -30,7 +30,7 @@ all: $(NAME)
 $(NAME): $(OFILES) $(SRC)
 		@make -C $(LIBFT)
 		@cp libft/libft.a ./$(NAME)
-		@clang -c $(SRC) -I $(HEADER) $(FLAGS)
+		@gcc -c $(SRC) -I $(HEADER) $(FLAGS)
 		@ar rc $(NAME) $(OFILES)
 		@ranlib $(NAME)
 
