@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 17:22:59 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/22 11:18:45 by tclarita         ###   ########.fr       */
+/*   Updated: 2021/01/23 21:49:55 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	**execute_comand(char **args, char **env, int i, char **comands)
 	if (i == 2)
 		return (unset_env(args, env));
 	if (i == 3)
-		return (cd(args, env));
+		return (new_cd(args, env));
 	if (i == 4)
 	{
 		my_exit(args, env, comands);

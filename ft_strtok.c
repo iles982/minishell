@@ -6,69 +6,52 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/23 17:48:56 by tclarita          #+#    #+#             */
-/*   Updated: 2020/09/07 12:30:43 by tclarita         ###   ########.fr       */
+/*   Updated: 2021/01/24 17:19:47 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	count_chars(char *s, char *sep)
+char		**get_strtok(char *str, int i2, int i, char **tab)
 {
-	int i;
-	int chars;
+	int i3;
 
-	chars = 0;
-	while (s[chars])
+	i3 = 0;
+	tab[i2] = (char *)malloc(sizeof(char) * 1024);
+	while (str[i] > 32)
 	{
-		i = 0;
-		while (sep[i])
-		{
-			if (s[chars] == sep[i++])
-				return (chars);
-		}
-		chars++;
+		tab[i2][i3] = str[i];
+		i++;
+		i3++;
 	}
-	return (chars);
+	tab[i2][i3] = '\0';
+	return (tab);
 }
 
-static int	count_parts(char *s, char *sep)
+char		**ft_strtok(char *str)
 {
-	int i;
-	int parts;
-
-	parts = 0;
-	while (*s)
-	{
-		i = 0;
-		while (sep[i])
-			(*s == sep[i++]) ? parts++ : 0;
-		s++;
-	}
-	return (parts + 1);
-}
-
-char		**ft_strtok(char *s, char *sep)
-{
-	char	**tok;
-	int		parts;
-	int		chars;
 	int		i;
-	int		j;
+	int		i2;
+	int		i3;
+	char	**tab;
 
-	parts = count_parts(s, sep);
 	i = 0;
-	tok = (char**)ft_memalloc(sizeof(char*) * parts + 1);
-	while (i < parts)
+	i2 = 0;
+	tab = (char**)malloc(sizeof(char *) * 1024);
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n')
+		i++;
+	while (str[i] != '\0')
 	{
-		j = 0;
-		(s && !(chars = count_chars(s, sep))) ? s++ : 0;
-		(s && chars) ? tok[i] = ft_strnew(chars) : 0;
-		while (*s && j < chars && chars > 0)
-			tok[i][j++] = *(s++);
-		(tok[i] || chars) ? i++ : 0;
-		if (!*s)
-			break ;
+		if (str[i] > 32)
+		{
+			tab = get_strtok(str, i2, i, tab);
+			while (str[i] > 32)
+				i++;
+			i2++;
+		}
+		else
+			i++;
 	}
-	tok[i] = NULL;
-	return (tok);
+	tab[i2] = 0;
+	return (tab);
 }

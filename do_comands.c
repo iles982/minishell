@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 12:04:09 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/22 11:35:37 by tclarita         ###   ########.fr       */
+/*   Updated: 2021/01/24 17:10:08 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		find_path(char **args, char **env, int i)
 		return (-1);
 	if (!env[j])
 		return (-1);
-	path = ft_strnew(PATH_MAX1);
+	path = ft_strnew(PATH_MAX);
 	k = 0;
 	while (env[j][i] != ':' && env[j][i])
 	{
@@ -99,13 +99,18 @@ char	**do_comands(char **env, char **comands)
 	i = 0;
 	while (comands[i])
 	{
-		args = ft_strtok(comands[i], DELIM);
+		args = ft_strtok(comands[i]);
 		if (!args[0])
 		{
 			free_str2(args);
 			return (env);
 		}
-		env = execute(args, env, comands);
+		else if (find_str(args, ">") != -1)
+			env = create_file(args, env, find_str(args, ">"));
+		else if (find_str(args, ">>") != -1)
+			env = fill_file(args, env, find_str(args, ">>"));
+		else
+			env = execute(args, env, comands);
 		free_str2(args);
 		i++;
 	}

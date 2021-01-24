@@ -6,7 +6,7 @@
 #    By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/21 17:52:57 by tclarita          #+#    #+#              #
-#    Updated: 2020/09/07 15:48:01 by tclarita         ###   ########.fr        #
+#    Updated: 2021/01/06 19:41:07 by tclarita         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,10 @@ all: $(NAME)
 
 $(NAME): $(OFILES) $(SRC)
 		@make -C $(LIBFT)
-		@cp libft/libft.a ./$(NAME)
-		@gcc -c $(SRC) -I $(HEADER) $(FLAGS)
-		@ar rc $(NAME) $(OFILES)
-		@ranlib $(NAME)
+		cp libft/libft.a ./$(NAME)
+		gcc -c $(SRC) -I $(HEADER) $(FLAGS)
+		ar rc $(NAME) $(OFILES)
+		ranlib $(NAME)
 
 %.o : %.c
 		@echo "$(NAME) >>> Add/Update $^"

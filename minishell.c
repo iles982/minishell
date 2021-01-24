@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 11:51:33 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/22 13:22:21 by tclarita         ###   ########.fr       */
+/*   Updated: 2021/01/23 22:04:38 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,11 @@ void	set_old_pwd(char **env)
 	arg[1] = ft_strdup("OLDPWD");
 	arg[2] = NULL;
 	arg[3] = NULL;
-	arg[2] = getcwd(arg[2], PATH_MAX1);
+	arg[2] = getcwd(arg[2], 1024);
 	set_env(arg, env);
 	free(arg[0]);
 	free(arg[1]);
 	free(arg[2]);
-	free(arg[3]);
 	free(arg);
 	return ;
 }
@@ -61,7 +60,9 @@ void	loop(char **env)
 	while (status)
 	{
 		j = 0;
+		write(1, "\e[38;5;196m", 11);
 		ft_putstr("Dota_Shell_$>");
+		write(1, "\e[38;5;69m", 10);
 		get_next_line(0, &line);
 		comands = ft_strsplit(line, ';');
 		free(line);
@@ -79,9 +80,9 @@ int		main(int ac, char **av, char *envp[])
 {
 	char	**env;
 
+	env = get_env(envp);
 	if (ac == 1)
 	{
-		env = get_env(envp);
 		loop(env);
 		return (0);
 	}

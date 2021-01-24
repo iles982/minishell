@@ -6,7 +6,7 @@
 /*   By: tclarita <tclarita@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/20 12:17:58 by tclarita          #+#    #+#             */
-/*   Updated: 2020/10/22 10:55:15 by tclarita         ###   ########.fr       */
+/*   Updated: 2021/01/24 16:45:13 by tclarita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_mystr(char *first, char *second, char c)
 
 	i = ft_strlen(first);
 	j = ft_strlen(second);
-	str = ft_strnew(i + j);
+	str = ft_strnew(i + j + 1);
 	k = 0;
 	while (k < i)
 	{
@@ -37,6 +37,7 @@ char	*ft_mystr(char *first, char *second, char c)
 		i++;
 		k++;
 	}
+	str[k] = '\0';
 	return (str);
 }
 
